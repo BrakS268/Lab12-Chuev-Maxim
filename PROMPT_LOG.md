@@ -219,3 +219,36 @@ full_name, email, subject, hourly_rate, experience_years, education, bio, is_act
 - Время: ~15 мин
 
 ---
+
+## Задание 8 (средняя): Поиск уязвимостей в коде
+
+**Инструмент:** Claude (claude.ai) в роли senior code reviewer
+
+**Промпт:**
+Ты senior python разработчик и security code reviewer.
+Найди потенциальные уязвимости в коде FastAPI-приложения:
+SQL-инъекции, XSS, незащищённые эндпоинты, отсутствие валидации входных данных,
+отсутствие rate limiting, CORS, логирования.
+Дай отчёт с severity-уровнями и конкретными рекомендациями по исправлению.
+
+[вставлен код main.py — FastAPI Tutor Platform]
+
+**Что сделано:**
+1. Создан `task8/report.md` — отчёт с 8 уязвимостями, разбитыми по severity:
+   - 🔴 Критические: отсутствие аутентификации
+   - 🟠 Высокие: email без валидации (`str` вместо `EmailStr`), XSS в текстовых полях
+   - 🟡 Средние: нет rate limiting, нет CORS, нет верхней границы у `hourly_rate`
+   - 🟢 Низкие: нет логирования, race condition в in-memory БД
+2. Создан `task8/main_secure.py` — исправленная версия с:
+   - `EmailStr` для валидации email
+   - `field_validator` с проверкой HTML-тегов (XSS)
+   - `CORSMiddleware` с белым списком доменов
+   - In-memory rate limiter (60 req/min per IP) через `Depends`
+   - `logging` на каждый запрос (IP, действие, ID)
+   - Верхняя граница `le=100_000` для `hourly_rate`
+
+**Вывод:** Обнаружено 8 уязвимостей; 6 исправлены в коде, 2 описаны как архитектурные
+(аутентификация и замена БД — требуют отдельных задач).
+
+---
+
