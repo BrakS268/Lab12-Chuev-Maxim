@@ -37,13 +37,10 @@ alembic/versions/__pycache__/
 .env.*
 !.env.example
 
-# Docker
-*.dockerignore
-
-# Uploads (task1 — загружаемые файлы)
+# Uploads
 uploads/
 
-# SQLite (task7 — миграции БД)
+# SQLite
 *.db
 *.sqlite3
 

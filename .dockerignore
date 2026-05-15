@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+*.egg-info/
+
+# Виртуальное окружение
+.venv/
+venv/
+env/
+
+# Секреты 
+.env
+*.env
+
+# IDE
+.idea/
+.vscode/
+
+# Документация и тесты 
+README.md
+PROMPT_LOG.md
+test_*.py
+*_test.py
+
+# Docker-файлы 
+Dockerfile
+docker-compose.yml

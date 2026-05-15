@@ -108,3 +108,29 @@
 - Время: ~10 мин
 
 ---
+
+## Задание 4 (средняя): Генерация Docker-конфигурации
+
+**Инструмент:** Claude (claude.ai)
+
+**Промпт:**
+Ты — senior Python разработчик. Создай Dockerfile и docker-compose.yml для FastAPI-приложения
+платформы репетиторов. Dockerfile должен собирать приложение на python:3.12-slim,
+docker-compose поднимает приложение и PostgreSQL 16. Учти: healthcheck для БД,
+зависимость app от db, запуск миграций Alembic перед стартом приложения,
+все секреты через переменные окружения. Добавь .env.example с описанием переменных.
+
+**Что сделано:**
+1. Создан `Dockerfile` — образ на python:3.12-slim, оптимизированные слои кеша,
+   запуск `alembic upgrade head` перед стартом uvicorn
+2. Создан `docker-compose.yml` — сервисы app и db (postgres:16-alpine),
+   healthcheck, depends_on с condition: service_healthy, именованный volume
+3. Создан `.env.example` — шаблон переменных окружения
+
+**Что исправлялось вручную:** - Добавлен .dockerignore — исключает .env, __pycache__, тесты и .git из образа
+
+### Итого
+- Количество промптов: 1
+- Время: ~10 мин
+
+---
